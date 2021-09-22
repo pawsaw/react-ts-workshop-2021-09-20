@@ -11,7 +11,7 @@ export interface CounterProps {
   onCounterValueChanged?: OnCounterValueChanged;
 }
 
-export const Counter: React.FC<CounterProps> = ({ value = 100, onCounterValueChanged = noop }) => {
+export const Counter: React.FC<CounterProps> = ({ value = 100, onCounterValueChanged = noop, children }) => {
 
 
   const increment = () => {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { interval } from 'rxjs';
-import './App.css';
+import { BookList } from './components/BookList';
 import { Counter, OnCounterValueChanged } from './components/Counter';
+import { books } from './data/books';
 
 function App() {
 
@@ -27,6 +27,9 @@ function App() {
     <div className="App">
       <Counter value={count} onCounterValueChanged={onCounterValueChanged} />
       <span>App says, the count is {count}</span>
+      <BookList books={books} onBookSelected={(book) => {
+        alert(`Book selected: ${book.title}`);
+      }} />
     </div>
   );
 }
