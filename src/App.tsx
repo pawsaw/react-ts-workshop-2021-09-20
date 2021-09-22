@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { interval } from 'rxjs';
 import './App.css';
-import { Counter } from './components/Counter';
+import { Counter, OnCounterValueChanged } from './components/Counter';
 
 function App() {
 
-  // const [count, setCount] = useState(77);
+  const [count, setCount] = useState(30);
 
   // useEffect(() => {
 
@@ -19,10 +19,14 @@ function App() {
 
   // }, []);
 
+  const onCounterValueChanged: OnCounterValueChanged = (currentValue: number) => {
+    setCount(currentValue);
+  }
+
   return (
     <div className="App">
-      <Counter initialValue={30} />
-      {/* <span>App says, the count is {count}</span> */}
+      <Counter value={count} onCounterValueChanged={onCounterValueChanged} />
+      <span>App says, the count is {count}</span>
     </div>
   );
 }
