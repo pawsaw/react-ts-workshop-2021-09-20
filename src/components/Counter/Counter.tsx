@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 
-export const Counter: React.FC = () => {
+export interface CounterProps {
+  initialValue?: number;
+}
 
-  const [count, setCount] = useState(0);
+export const Counter: React.FC<CounterProps> = ({ initialValue = 100 }) => {
+
+  const [count, setCount] = useState(initialValue);
 
   const increment = () => {
     setCount(count + 1);
