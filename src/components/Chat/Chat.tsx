@@ -1,25 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { ChatMessage, useChatApi } from '../../domain/chat';
 
-type Subscription = string;
-interface ChatMessage {
-  text: string;
-}
+export interface ChatProps {}
 
-interface OnChatMessageReceived {
-  (messages: ChatMessage[]): void;
-}
-
-interface ChatApi {
-  subscribe(callback: OnChatMessageReceived): Subscription;
-  unsubscribe(sub: Subscription): void;
-}
-
-interface ChatProps {
-  api: ChatApi;
-}
-
-const Chat: React.FC<ChatProps> = ({ api }) => {
-
+export const Chat: React.FC<ChatProps> = () => {
+  const api = useChatApi();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   useEffect(() => {
     const sub = api.subscribe((_messages) => {
@@ -27,13 +12,14 @@ const Chat: React.FC<ChatProps> = ({ api }) => {
     });
     return () => {
       api.unsubscribe(sub);
-    }
+    };
   }, [api]);
 
-  return <div>
-    {
-      messages.map((msg, i) => <span key={i}>{msg.text}</span>)
-    }
-  </div>
-
+  return (
+    <div>
+      {messages.map((msg, i) => (
+        <span key={i}>{msg.text}</span>
+      ))}
+    </div>
+  );
 };
