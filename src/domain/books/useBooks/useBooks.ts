@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Book } from '..'
+import { Book } from '..';
 
-export const useBooks = (): Book[] | null => {
+export const useBooks = (): Book[] | null => {
   const [books, setBooks] = useState<Book[] | null>(null);
   useEffect(() => {
     (async () => {
@@ -12,4 +12,4 @@ export const useBooks = (): Book[] | null => {
   }, []);
 
   return books;
-}
+};

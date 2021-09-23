@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Book, ISBN } from '..'
+import { Book, ISBN } from '..';
 
-export const useBook = (isbn: ISBN): Book | null => {
+export const useBook = (isbn: ISBN): Book | null => {
   const [book, setBook] = useState<Book | null>(null);
   useEffect(() => {
     (async () => {
@@ -12,4 +12,4 @@ export const useBook = (isbn: ISBN): Book | null => {
   }, [isbn]);
 
   return book;
-}
+};
