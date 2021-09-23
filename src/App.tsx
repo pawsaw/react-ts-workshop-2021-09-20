@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BookDetail } from './components/BookDetail';
 import { BookList } from './components/BookList';
+import { CreateBook } from './components/CreateBook';
 import { Book, useBooks } from './domain/books';
 
 function App() {
@@ -21,6 +22,10 @@ function App() {
       )}
 
       {selectedBook ? <BookDetail book={selectedBook} /> : <span>No book selected.</span>}
+      <div>
+        <h2>Create Book</h2>
+        <CreateBook onSubmit={(data) => console.log(data)} />
+      </div>
     </div>
   );
 }
