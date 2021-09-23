@@ -14,7 +14,6 @@ interface ChatApi {
   unsubscribe(sub: Subscription): void;
 }
 
-
 interface ChatProps {
   api: ChatApi;
 }

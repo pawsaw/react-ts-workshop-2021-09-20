@@ -1,35 +1,36 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { BookDetail } from './components/BookDetail';
 import { BookList } from './components/BookList';
-import { Counter, OnCounterValueChanged } from './components/Counter';
-import { books } from './data/books';
+import { Book, useBooks } from './domain/books';
+
 
 function App() {
 
-  const [count, setCount] = useState(30);
 
-  // useEffect(() => {
+  const [selectedBook, setSelectedBook] = useState<Book | null>(null);
+  const books: Book[] | null = useBooks();
 
-  //   const i = setInterval(() => {
-  //     setCount(prevCount => prevCount + 1);
-  //   }, 1000)
-    
-  //   return () => {
-  //     clearInterval(i);
-  //   }
-
-  // }, []);
-
-  const onCounterValueChanged: OnCounterValueChanged = (currentValue: number) => {
-    setCount(currentValue);
-  }
 
   return (
     <div className="App">
-      <Counter value={count} onCounterValueChanged={onCounterValueChanged} />
-      <span>App says, the count is {count}</span>
-      <BookList books={books} onBookSelected={(book) => {
-        alert(`Book selected: ${book.title}`);
-      }} />
+      {
+        books ? (
+        <BookList books={books} onBookSelected={(_book) => {
+                setSelectedBook(_book);
+          }} />
+        ) : (
+          <span>Loading...</span>
+        )
+      }
+      
+      {
+        selectedBook ? (
+          <BookDetail book={selectedBook} />
+        ) : (
+          <span>No book selected.</span>
+        )
+      }
+      
     </div>
   );
 }
