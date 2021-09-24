@@ -4,11 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ChatApiProvider } from './domain/chat';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
     <ChatApiProvider api={null}>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </ChatApiProvider>
   </React.StrictMode>,
   document.getElementById('root'),
