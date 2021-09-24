@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { BookDetail } from './components/BookDetail';
 import { BookList } from './components/BookList';
 import { CreateBook } from './components/CreateBook';
+import { SimpleForm } from './components/SimpleForm';
 import { Book, useBooks } from './domain/books';
 
 function App() {
@@ -25,6 +26,10 @@ function App() {
       <div>
         <h2>Create Book</h2>
         <CreateBook onSubmit={(data) => console.log(data)} />
+      </div>
+      <div>
+        <h2>Simple Form</h2>
+        <SimpleForm onSubmit={(data) => console.log(data)} />
       </div>
     </div>
   );
