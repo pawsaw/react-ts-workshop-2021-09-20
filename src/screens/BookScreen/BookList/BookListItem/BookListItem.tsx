@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Book } from '../../../../domain/books';
 
 export interface OnBookSelected {
@@ -11,5 +12,9 @@ export interface BookListItemProps {
 }
 
 export const BookListItem: React.FC<BookListItemProps> = ({ book, onBookSelected }) => {
-  return <div onClick={() => onBookSelected(book)}>{book.title}</div>;
+  return (
+    <div>
+      {book.title} - <span onClick={() => onBookSelected(book)}>show</span>
+    </div>
+  );
 };

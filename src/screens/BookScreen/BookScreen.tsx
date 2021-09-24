@@ -1,26 +1,18 @@
 import React, { useState } from 'react';
 import { Book, useBooks } from '../../domain/books';
-import { BookList } from './BookList';
+import { noop } from '../../utils/noop';
+import { BookList, OnBookSelected } from './BookList';
 
-export interface BookScreenProps {}
+export interface BookScreenProps {
+  onBookSelected?: OnBookSelected;
+}
 
-export const BookScreen: React.FC<BookScreenProps> = () => {
-  const [selectedBook, setSelectedBook] = useState<Book | null>(null);
-
+export const BookScreen: React.FC<BookScreenProps> = ({ onBookSelected = noop }) => {
   const books: Book[] | null = useBooks();
   return (
     <div>
       <h1>Books</h1>
-      {books ? (
-        <BookList
-          books={books}
-          onBookSelected={(_book) => {
-            setSelectedBook(_book);
-          }}
-        />
-      ) : (
-        <span>Loading...</span>
-      )}
+      {books ? <BookList books={books} onBookSelected={onBookSelected} /> : <span>Loading...</span>}
     </div>
   );
 };

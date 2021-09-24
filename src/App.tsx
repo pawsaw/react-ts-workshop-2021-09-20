@@ -1,9 +1,18 @@
-import { NavLink, Route, Switch, Redirect } from 'react-router-dom';
+import { NavLink, Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import './App.css';
+import { Book } from './domain/books';
+import { BookDetailScreen } from './screens/BookDetailsScreen';
 import { BookScreen } from './screens/BookScreen';
+import { OnBookSelected } from './screens/BookScreen/BookList';
 import { PlaygroundScreen } from './screens/PlaygroundScreen';
 
 function App() {
+  const history = useHistory();
+
+  const onBookSelected: OnBookSelected = (book: Book): void => {
+    history.push(`/books/${book.isbn}`);
+  };
+
   return (
     <div className="App">
       <nav>
@@ -21,8 +30,11 @@ function App() {
           <Route path="/playground">
             <PlaygroundScreen />
           </Route>
+          <Route path="/books/:isbn">
+            <BookDetailScreen />
+          </Route>
           <Route path="/books">
-            <BookScreen />
+            <BookScreen onBookSelected={onBookSelected} />
           </Route>
           <Redirect exact path="/" to="/books" />
           <Route>
